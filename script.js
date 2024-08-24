@@ -1,36 +1,36 @@
 const url='https://randomuser.me/api/';
 
-let avatar=document.getElementById('avatar');
+let img=document.getElementById('userImg');
 let name = document.getElementById('name');
 let email = document.getElementById('email');
 let btn = document.getElementById('btn');
 
 btn.addEventListener("click", function() {
     fetch(url)
-      .then(handleErrors)
+     .then(handleErrors)
       .then(parseJSON)
       .then(updateProfile)
       .catch(printError)
   });
   
-  function handleErrors (res){
-    if(!res.ok){
-      throw error(res.status);
+  function handleErrors (result){
+    if(!result.ok){
+      throw error(result.status);
     }
-    console.log(res);
-    return res;
+    console.log(result);
+    return result;
   }
   
-  function parseJSON (res){
-    return res.json();
+  function parseJSON (result){
+    return result.json();
   }
   
   function updateProfile (profile){
-    avatar.src = profile.results[0].picture.medium;
+    img.src = profile.results[0].picture.large;
     name.innerHTML = profile.results[0].name.first+ " " + profile.results[0].name.last; ; 
-   // username.innerHTML = profile.results[0].login.username; 
+   
     email.innerHTML = profile.results[0].email;
-   //city.innerHTML = profile.results[0].location.city;
+   
     return 1;
   }
   
